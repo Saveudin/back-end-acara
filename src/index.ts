@@ -11,11 +11,18 @@ async function init (){
     try {
         const result = await db();
         console.log("Database status: ",result);
+
+        
     
         // middleware
         app.use(bodyParser.json());
         app.use('/api', router);
-        
+        app.get('/', (req, res) => {
+            res.status(200).json({
+                message: "Server is running",
+                data: null
+            })
+        })
         app.listen(PORT, () => {
             console.log(`Server is running on http://localhost:${PORT}`);
     
